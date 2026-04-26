@@ -362,9 +362,9 @@ const projects = [
     problem:
       "Селлер видит заказы, продажи и оборот, но не всегда понимает, сколько реально зарабатывает после себестоимости, комиссий, логистики, хранения, рекламы и операционных расходов.",
     solution:
-      "Система получает данные кабинета по API Wildberries, автоматически считает маржинальность и рентабельность по артикулам, показывает данные по дням и суммарно, учитывает ключевые расходы, отображает выполнение плана и помогает быстрее находить товары, которые тянут прибыль вниз.",
+      "Система получает данные кабинета по API Wildberries и собирает слой управленческой логики поверх сырых отчётов: продажи, финансы, себестоимость, комиссии, логистика, реклама, маржинальность и рентабельность по дням и артикулам. Продукт доступен как SellerFocus: sellerfocus.pro.",
     effect:
-      "Собственник видит не грязный оборот, а управленческую финансовую картину: где прибыль, где убыток, какие позиции стоит усиливать, а какие пересматривать.",
+      "Собственник видит не грязный оборот, а управленческую финансовую картину: какие товары кормят бизнес, какие съедают деньги, где проседает маржа и какие решения нужно принимать по ассортименту.",
   },
   {
     title: "WMS для фулфилментов и складских операций",
@@ -423,31 +423,70 @@ const projects = [
   },
 ];
 
-const background = [
-  "руководство розничными магазинами",
-  "складские операции и понимание физической логики склада",
-  "продажи и роль РОПа",
-  "IT-проекты в логистике",
-  "IT-проекты в девелопменте",
-  "собственный опыт в e-commerce и маркетплейсах",
-  "разработка прикладных AI- и automation-продуктов",
+const backgroundBlocks = [
+  {
+    title: "Бизнес и продажи",
+    text: "Около 6 лет в продажах, рознице и управлении коммерческими процессами: клиенты, план, выручка, операционное давление, ручные процессы и ответственность за результат.",
+    items: ["розница", "продажи", "роль РОПа", "операционная реальность"],
+  },
+  {
+    title: "Корпоративный IT",
+    text: "Более 5 лет в IT: управление командами, проектная работа, внутренние продукты, автоматизация процессов, документооборот, интеграции и регуляторные задачи.",
+    items: ["управление IT-командами", "Единое окно", "ДОК", "интеграции с УЦ"],
+  },
+  {
+    title: "Логистика и регуляторка",
+    text: "Участие в регуляторном проекте ЭТрН в DPD: процессы перевозки, электронные транспортные документы, роли участников, требования и ограничения крупной компании.",
+    items: ["DPD", "ЭТрН", "XSD/XML", "бизнес-процессы перевозки"],
+  },
+  {
+    title: "Собственные продукты",
+    text: "MVP и прикладные инструменты вокруг маркетплейсов, складов, AI, контента и автоматизации регулярной рутины.",
+    items: ["SellerFocus", "WMS", "AI-боты", "automation-инструменты"],
+  },
 ];
 
-const tech = [
-  "Python",
-  "React",
-  "Google Apps Script",
-  "Docker",
-  "API маркетплейсов",
-  "OpenAI GPT API",
-  "Whisper API",
-  "Telegram Bot API",
-  "Cursor",
-  "Claude",
-  "Gemini",
-  "Google Sheets / дашборды",
-  "low-code",
-  "AI-assisted development",
+const techGroups = [
+  {
+    title: "Продукт и интерфейс",
+    items: ["React", "дашборды", "UX-сценарии", "прототипы"],
+  },
+  {
+    title: "Backend и интеграции",
+    items: ["Python", "Docker", "API маркетплейсов", "Telegram Bot API"],
+  },
+  {
+    title: "AI-слой",
+    items: ["OpenAI GPT API", "Whisper API", "Claude", "Gemini"],
+  },
+  {
+    title: "Быстрая сборка",
+    items: ["Cursor", "Google Apps Script", "Google Sheets", "low-code"],
+  },
+];
+
+const transformationExamples = [
+  "хаотичные Excel-таблицы → управленческий дашборд",
+  "ручные отчёты → автоматическая загрузка и расчёт",
+  "сырые данные WB → прибыль и рентабельность по артикулам",
+  "складской процесс → статусы, ячейки, движения и остатки",
+  "длинные встречи → решения, задачи и протокол",
+  "сложные XSD/XML → понятная структура полей и ролей",
+];
+
+const corporateProjects = [
+  {
+    title: "DPD / ЭТрН",
+    text: "Участие в регуляторном IT-проекте электронных транспортных накладных: бизнес-процессы перевозки, роли участников, документы, статусы, требования и корпоративные ограничения.",
+  },
+  {
+    title: "ПИК / внутренние IT-проекты",
+    text: "Участие в задачах и проектах вокруг «Единого окна», автоматизации процессов ДОК, интеграций с удостоверяющими центрами и задач УКО в крупной девелоперской среде.",
+  },
+  {
+    title: "Управление IT-командами",
+    text: "Около 3 лет управления IT-командами: планирование, координация разработки, работа с требованиями, релизами, приоритетами и связкой бизнес ↔ IT.",
+  },
 ];
 
 function SectionTitle({
@@ -736,7 +775,7 @@ export default function BusinessAutomationPortfolioPage() {
                     Фокус
                   </div>
                   <div className="mt-2 text-lg font-medium text-[#0F172A]">
-                    данные, процессы, управляемость
+                    процессы, деньги, данные, контроль
                   </div>
                 </CardContent>
               </Card>
@@ -760,7 +799,7 @@ export default function BusinessAutomationPortfolioPage() {
                     Подход
                   </div>
                   <div className="mt-2 text-lg font-medium text-[#0F172A]">
-                    от боли бизнеса до рабочего MVP
+                    от неясной задачи до рабочего контура
                   </div>
                 </CardContent>
               </Card>
@@ -768,7 +807,7 @@ export default function BusinessAutomationPortfolioPage() {
 
             <div className="mt-10 flex flex-wrap items-center gap-3 text-sm text-[#64748B]">
               <span className="inline-flex h-2 w-2 rounded-full bg-[#C8A96A]" />
-              <span>Минимальный мягкий акцент — только для деталей</span>
+              <span>Бизнесовый бэкграунд + корпоративный IT + собственные продукты</span>
             </div>
           </div>
         </div>
@@ -807,6 +846,38 @@ export default function BusinessAutomationPortfolioPage() {
             </div>
 
             <ProcessMapGraphic />
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <div>
+              <div className="text-sm font-medium uppercase tracking-[0.24em] text-[#64748B]">
+                Сильная зона
+              </div>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#0F172A] md:text-5xl">
+                Задачи, которые зависают между бизнесом, IT и операционкой.
+              </h2>
+              <p className="mt-6 text-lg leading-8 text-[#475569]">
+                Я особенно полезен там, где недостаточно просто поставить задачу
+                разработчику или нанять аналитика. Нужно одновременно понять
+                бизнес-процесс, деньги, данные, пользователей, интеграции,
+                ограничения и быстро собрать первый рабочий контур.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              {transformationExamples.map((item) => (
+                <Card key={item} className="rounded-[2rem]">
+                  <CardContent className="flex h-full items-start gap-3 p-6">
+                    <IconArrowRight className="mt-1 h-5 w-5 shrink-0 text-[#64748B]" />
+                    <p className="leading-7 text-[#475569]">{item}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -883,7 +954,18 @@ export default function BusinessAutomationPortfolioPage() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div>
+              <div className="mb-4 rounded-[2rem] border border-[#E2E8F0] bg-white p-6 shadow-soft">
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#64748B]">
+                  Как я смотрю на AI-сценарий
+                </div>
+                <p className="mt-3 leading-7 text-[#475569]">
+                  входные данные → контекст → AI-обработка → проверка → действие
+                  в системе → сохранение результата. Не “нейросеть что-то
+                  сгенерит”, а встроенный участок процесса.
+                </p>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2">
               {[
                 "обработка отзывов и обращений",
                 "лиды и первичная квалификация",
@@ -902,6 +984,7 @@ export default function BusinessAutomationPortfolioPage() {
                   <span className="leading-7 text-[#475569]">{item}</span>
                 </div>
               ))}
+              </div>
             </div>
           </div>
         </div>
@@ -910,9 +993,32 @@ export default function BusinessAutomationPortfolioPage() {
       <section className="px-5 py-16 md:px-10 md:py-24">
         <div className="mx-auto max-w-7xl">
           <SectionTitle
-            eyebrow="Кейсы и продукты"
-            title="Что уже собирал"
-            text="Ниже — не витрина абстрактных компетенций, а прикладные инструменты и продукты вокруг маркетплейсов, складских операций, AI и автоматизации регулярной рутины."
+            eyebrow="Корпоративный опыт"
+            title="Не продуктовые кейсы, а контекст сложных IT-проектов"
+            text="Эти проекты я не подаю как собственные продукты. Это корпоративный бэкграунд, который показывает опыт работы с регламентами, документами, интеграциями, командами и ограничениями крупных компаний."
+          />
+          <div className="grid gap-5 lg:grid-cols-3">
+            {corporateProjects.map((item) => (
+              <Card key={item.title} className="h-full rounded-[2rem]">
+                <CardContent className="p-7">
+                  <IconBriefcase className="mb-5 h-7 w-7 text-[#0F172A]" />
+                  <h3 className="text-2xl font-semibold tracking-tight text-[#0F172A]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-4 leading-7 text-[#475569]">{item.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="Собственные продукты и MVP"
+            title="Что уже собирал сам"
+            text="Ниже — продукты, MVP и прикладные инструменты, где я сам собирал бизнес-логику, сценарии, интерфейс или рабочий контур вокруг маркетплейсов, складских операций, AI и регулярной рутины."
           />
           <div className="grid gap-6 lg:grid-cols-2">
             {projects.map((project) => {
@@ -961,49 +1067,55 @@ export default function BusinessAutomationPortfolioPage() {
       </section>
 
       <section className="px-5 py-16 md:px-10 md:py-24">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
-          <Card className="h-full rounded-[2rem]">
-            <CardContent className="p-8 md:p-10">
-              <div className="text-sm font-medium uppercase tracking-[0.24em] text-[#64748B]">
-                Бэкграунд
-              </div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#0F172A]">
-                Почему это не только про IT
-              </h2>
-              <p className="mt-5 leading-8 text-[#475569]">
-                Мой опыт собран из разных контекстов: розница, склад, продажи, IT,
-                логистика, девелопмент, маркетплейсы и собственные продукты.
-                Поэтому я вижу автоматизацию через бизнесовые показатели и
-                операционную реальность, а не только через интерфейс и код.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                {background.map((item) => (
-                  <Pill key={item}>{item}</Pill>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="Бэкграунд"
+            title="Почему это не только про IT"
+            text="Опыт собран из нескольких слоёв: продажи, розница, склад, корпоративный IT, логистика, девелопмент, маркетплейсы и собственные продукты. Поэтому я вижу автоматизацию через бизнесовые показатели и операционную реальность, а не только через интерфейс и код."
+          />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {backgroundBlocks.map((block) => (
+              <Card key={block.title} className="h-full rounded-[2rem]">
+                <CardContent className="p-7">
+                  <h3 className="text-2xl font-semibold tracking-tight text-[#0F172A]">
+                    {block.title}
+                  </h3>
+                  <p className="mt-4 leading-7 text-[#475569]">{block.text}</p>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {block.items.map((item) => (
+                      <Pill key={item}>{item}</Pill>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Card className="h-full rounded-[2rem]">
-            <CardContent className="p-8 md:p-10">
-              <div className="text-sm font-medium uppercase tracking-[0.24em] text-[#64748B]">
-                Стек
-              </div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-[#0F172A]">
-                Инструменты, которыми собираю решения
-              </h2>
-              <p className="mt-5 leading-8 text-[#475569]">
-                Стек для меня — не самоцель. Важнее связка: бизнес-анализ, логика
-                процесса, данные, интеграции, AI и рабочий интерфейс, который
-                можно использовать в реальном процессе.
-              </p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                {tech.map((item) => (
-                  <Pill key={item}>{item}</Pill>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="Стек"
+            title="Инструменты, которыми собираю решения"
+            text="Стек для меня — не самоцель. Важнее связка: бизнес-анализ, логика процесса, данные, интеграции, AI и рабочий интерфейс, который можно использовать в реальном процессе."
+          />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {techGroups.map((group) => (
+              <Card key={group.title} className="h-full rounded-[2rem]">
+                <CardContent className="p-7">
+                  <h3 className="text-xl font-semibold tracking-tight text-[#0F172A]">
+                    {group.title}
+                  </h3>
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <Pill key={item}>{item}</Pill>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
