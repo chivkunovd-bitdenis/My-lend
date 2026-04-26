@@ -1,0 +1,389 @@
+import React from "react";
+import { motion } from "framer-motion";
+import { ArrowRight, Boxes, Brain, BriefcaseBusiness, ChartNoAxesCombined, Database, FileText, Layers3, PackageCheck, Sparkles, Workflow, Wrench } from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const sectionTransition = {
+  duration: 0.55,
+  ease: "easeOut",
+};
+
+const pains = [
+  "прибыль считается примерно, а решения принимаются по обороту",
+  "данные живут в Excel, чатах, кабинетах и отдельных отчётах",
+  "сотрудники регулярно делают руками однотипные операции",
+  "склад, остатки и статусы держатся на памяти людей",
+  "CRM или учётная система есть, но процесс всё равно работает криво",
+  "собственник не видит управленческую картину в одном окне",
+  "AI хочется внедрить, но непонятно, куда именно и зачем",
+  "разработка кажется дорогой, долгой и технически непонятной",
+];
+
+const approach = [
+  {
+    icon: Workflow,
+    title: "Разбираю процесс",
+    text: "Смотрю, как задача работает сейчас: где появляются данные, кто что делает руками, где возникают ошибки, где бизнес теряет скорость, деньги или контроль.",
+  },
+  {
+    icon: FileText,
+    title: "Описываю бизнес-логику",
+    text: "Перевожу хаос из таблиц, чатов и устных договорённостей в понятную систему: роли, сценарии, статусы, правила расчётов, исключения и контрольные точки.",
+  },
+  {
+    icon: Layers3,
+    title: "Проектирую решение",
+    text: "Продумываю пользовательские сценарии, структуру данных, интеграции, ограничения и логику будущего инструмента так, чтобы он решал задачу бизнеса, а не просто выглядел как IT-система.",
+  },
+  {
+    icon: Wrench,
+    title: "Собираю рабочий инструмент",
+    text: "Делаю MVP, интерфейс, дашборд, бота, API-интеграцию, AI-сценарий или внутренний сервис под конкретную задачу и проверяю его на реальных сценариях.",
+  },
+];
+
+const projects = [
+  {
+    title: "Финансовая оцифровка для WB-селлеров",
+    status: "Рабочий продукт, есть реальные пользователи",
+    icon: ChartNoAxesCombined,
+    problem: "Селлер видит заказы, продажи и оборот, но не всегда понимает, сколько реально зарабатывает после себестоимости, комиссий, логистики, хранения, рекламы и операционных расходов.",
+    solution: "Система считает прибыльность и маржинальность по артикулам, показывает данные по дням и суммарно, учитывает ключевые расходы, отображает выполнение плана и помогает быстрее находить товары, которые тянут прибыль вниз.",
+    effect: "Собственник видит не грязный оборот, а управленческую финансовую картину: где прибыль, где убыток, какие позиции стоит усиливать, а какие пересматривать.",
+  },
+  {
+    title: "WMS для фулфилментов и складских операций",
+    status: "MVP, готовится к тестированию на реальных сценариях",
+    icon: PackageCheck,
+    problem: "При ручном складском учёте бизнес зависит от памяти сотрудников, сталкивается с ошибками в приёмке, сборке, остатках, отгрузках и спорных ситуациях.",
+    solution: "MVP покрывает заявки селлеров, карточки товаров, приёмку, заказы, остатки, адресное хранение, движение товара, статусы операций, сценарии API-интеграций и логику работы со штрихкодами.",
+    effect: "Цель — сделать склад управляемым: видеть остатки и движение товара, снизить риск ошибок и уменьшить зависимость процесса от отдельных сотрудников.",
+  },
+  {
+    title: "Инструмент записи и саммаризации встреч",
+    status: "Прикладной AI-инструмент",
+    icon: Brain,
+    problem: "После встреч договорённости, решения и задачи часто остаются в голове участников или фиксируются вручную и нерегулярно.",
+    solution: "Инструмент записывает аудио, передаёт его в Whisper API, затем структурирует через GPT API и сохраняет готовый результат в рабочую папку.",
+    effect: "Встречи превращаются в структурированные итоги: решения, задачи, договорённости и ключевые тезисы фиксируются автоматически.",
+  },
+  {
+    title: "Автопостинг в Pinterest",
+    status: "Инструмент для контент-рутины",
+    icon: Sparkles,
+    problem: "Контент-маркетинг часто упирается не в идеи, а в ручную рутину: подготовить, загрузить, оформить и опубликовать десятки единиц контента.",
+    solution: "Решение автоматизирует массовую публикацию контента и помогает тестировать гипотезы органического трафика с меньшей ручной нагрузкой.",
+    effect: "Бизнес получает возможность чаще публиковать контент и дешевле проверять каналы продвижения без пропорционального роста ручной работы.",
+  },
+  {
+    title: "AI-бот для ответов на отзывы WB",
+    status: "AI-сценарий для маркетплейсов",
+    icon: Boxes,
+    problem: "Отзывы важны для доверия к карточке, но регулярная обработка отнимает время и часто делается нерегулярно.",
+    solution: "Бот генерирует ответы на отзывы покупателей с учётом контекста, особенностей товара и желаемого тона коммуникации бренда.",
+    effect: "Снижается ручная нагрузка, коммуникация с покупателями становится регулярнее, а тон бренда — более единым.",
+  },
+  {
+    title: "Telegram-бот для саммаризации видео",
+    status: "R&D / экспериментальный инструмент",
+    icon: FileText,
+    problem: "Длинные обучающие и экспертные видео сложно быстро перерабатывать в прикладные заметки и выводы.",
+    solution: "Бот извлекает суть из длинного контента: транскрибирует, структурирует, делает краткое саммари и выделяет ключевые тезисы.",
+    effect: "Помогает быстрее превращать длинные материалы в понятный текстовый конспект для дальнейшей работы.",
+  },
+];
+
+const background = [
+  "руководство розничными магазинами",
+  "складские операции и понимание физической логики склада",
+  "продажи и роль РОПа",
+  "IT-проекты в логистике",
+  "IT-проекты в девелопменте",
+  "собственный опыт в e-commerce и маркетплейсах",
+  "разработка прикладных AI- и automation-продуктов",
+];
+
+const tech = [
+  "Python",
+  "React",
+  "Google Apps Script",
+  "Docker",
+  "API маркетплейсов",
+  "OpenAI GPT API",
+  "Whisper API",
+  "Telegram Bot API",
+  "Cursor",
+  "Claude",
+  "Gemini",
+  "Google Sheets / дашборды",
+  "low-code",
+  "AI-assisted development",
+];
+
+function SectionTitle({ eyebrow, title, text }) {
+  return (
+    <motion.div
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={fadeUp}
+      transition={sectionTransition}
+      className="mx-auto mb-10 max-w-3xl text-center"
+    >
+      {eyebrow && <div className="mb-3 text-sm font-medium uppercase tracking-[0.24em] text-slate-500">{eyebrow}</div>}
+      <h2 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-5xl">{title}</h2>
+      {text && <p className="mt-5 text-lg leading-8 text-slate-600">{text}</p>}
+    </motion.div>
+  );
+}
+
+function Pill({ children }) {
+  return <span className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm">{children}</span>;
+}
+
+export default function BusinessAutomationPortfolioPage() {
+  return (
+    <main className="min-h-screen bg-[#f7f5f0] text-slate-950">
+      <section className="relative overflow-hidden px-5 py-20 md:px-10 md:py-28">
+        <div className="absolute left-1/2 top-0 h-[560px] w-[760px] -translate-x-1/2 rounded-full bg-white/70 blur-3xl" />
+        <div className="relative mx-auto max-w-7xl">
+          <motion.div initial="hidden" animate="visible" variants={fadeUp} transition={sectionTransition} className="max-w-5xl">
+            <div className="mb-8 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm text-slate-600 shadow-sm backdrop-blur">
+              Портфолио прикладной бизнес-автоматизации и AI
+            </div>
+            <h1 className="max-w-5xl text-5xl font-semibold tracking-[-0.04em] text-slate-950 md:text-7xl">
+              Практик бизнес-автоматизации на стыке процессов, маркетплейсов, IT и AI.
+            </h1>
+            <p className="mt-8 max-w-3xl text-xl leading-9 text-slate-650 md:text-2xl">
+              Я разбираю реальные бизнесовые задачи: где компания теряет деньги, время или контроль; превращаю хаос в понятную логику; собираю рабочий инструмент и проверяю его на живых сценариях.
+            </p>
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              <Card className="rounded-3xl border-slate-200 bg-white/80 shadow-sm backdrop-blur">
+                <CardContent className="p-6">
+                  <Database className="mb-4 h-7 w-7 text-slate-800" />
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-500">Фокус</div>
+                  <div className="mt-2 text-lg font-medium">данные, процессы, управляемость</div>
+                </CardContent>
+              </Card>
+              <Card className="rounded-3xl border-slate-200 bg-white/80 shadow-sm backdrop-blur">
+                <CardContent className="p-6">
+                  <Brain className="mb-4 h-7 w-7 text-slate-800" />
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-500">AI</div>
+                  <div className="mt-2 text-lg font-medium">не ради моды, а внутри регулярных задач</div>
+                </CardContent>
+              </Card>
+              <Card className="rounded-3xl border-slate-200 bg-white/80 shadow-sm backdrop-blur">
+                <CardContent className="p-6">
+                  <BriefcaseBusiness className="mb-4 h-7 w-7 text-slate-800" />
+                  <div className="text-sm uppercase tracking-[0.18em] text-slate-500">Подход</div>
+                  <div className="mt-2 text-lg font-medium">от боли бизнеса до рабочего MVP</div>
+                </CardContent>
+              </Card>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={sectionTransition}>
+              <div className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">Кто я</div>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">Не классический РП, не чистый аналитик и не разработчик “по ТЗ”.</h2>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: 0.08 }} className="space-y-6 text-lg leading-8 text-slate-650">
+              <p>
+                Мой профиль — практическая автоматизация бизнеса: разобраться в процессе, увидеть потери, описать логику, спроектировать решение и быстро собрать инструмент, который можно использовать в работе.
+              </p>
+              <p>
+                Я не смотрю на автоматизацию как на “айтишный проект ради айтишного проекта”. Для меня это способ убрать конкретные потери: ручной труд, ошибки, непрозрачные остатки, слабую аналитику, разрозненные таблицы и отсутствие единой управленческой картины.
+              </p>
+              <p>
+                В крупных задачах моя сильная зона — не обещать заменить всю разработку, а быстро собрать прототип, проявить бизнес-логику, проверить сценарии и подготовить понятную основу для дальнейшей работы команды.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="Тип задач"
+            title="Где я обычно полезен"
+            text="В бизнесах, которые уже выросли из ручного управления, но ещё не пришли к зрелому IT-контуру: процессы есть, деньги есть, операционка есть — а прозрачности и связности не хватает."
+          />
+          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {pains.map((pain, index) => (
+              <motion.div key={pain} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: index * 0.03 }}>
+                <Card className="h-full rounded-3xl border-slate-200 bg-white shadow-sm">
+                  <CardContent className="p-6">
+                    <div className="mb-5 flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-100 text-sm font-semibold text-slate-700">{index + 1}</div>
+                    <p className="leading-7 text-slate-700">{pain}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-slate-950 px-6 py-16 text-white md:px-12 md:py-20">
+          <SectionTitle
+            eyebrow="Подход"
+            title="От неясной боли до понятного инструмента"
+            text="Я не начинаю с технологии. Сначала нужно понять, что именно в процессе ломается, сколько это стоит бизнесу и какую логику надо собрать, чтобы процесс стал управляемым."
+          />
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {approach.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div key={item.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: index * 0.05 }}>
+                  <Card className="h-full rounded-3xl border-white/10 bg-white/[0.06] text-white shadow-none">
+                    <CardContent className="p-6">
+                      <Icon className="mb-5 h-8 w-8 text-white" />
+                      <h3 className="text-xl font-semibold">{item.title}</h3>
+                      <p className="mt-4 leading-7 text-white/70">{item.text}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={sectionTransition}>
+              <div className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">Прикладной AI</div>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">AI не как игрушка, а как слой внутри процесса.</h2>
+              <p className="mt-6 text-lg leading-8 text-slate-650">
+                Нейросеть сама по себе редко решает бизнес-задачу. Ценность появляется, когда AI встроен в понятный сценарий: есть входящие данные, правила, контекст, проверка результата и место в процессе.
+              </p>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: 0.08 }} className="grid gap-3 sm:grid-cols-2">
+              {["обработка отзывов и обращений", "лиды и первичная квалификация", "тексты, описания и контент", "изображения и визуальные материалы", "саммаризация встреч", "разбор документов", "внутренние базы знаний", "управленческие сводки и отчёты"].map((item) => (
+                <div key={item} className="flex items-start gap-3 rounded-3xl bg-white p-5 shadow-sm">
+                  <ArrowRight className="mt-1 h-5 w-5 shrink-0 text-slate-500" />
+                  <span className="leading-7 text-slate-700">{item}</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto max-w-7xl">
+          <SectionTitle
+            eyebrow="Кейсы и продукты"
+            title="Что уже собирал"
+            text="Ниже — не витрина абстрактных компетенций, а прикладные инструменты и продукты вокруг маркетплейсов, складских операций, AI и автоматизации регулярной рутины."
+          />
+          <div className="grid gap-6 lg:grid-cols-2">
+            {projects.map((project, index) => {
+              const Icon = project.icon;
+              return (
+                <motion.div key={project.title} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: index * 0.04 }}>
+                  <Card className="h-full rounded-[2rem] border-slate-200 bg-white shadow-sm">
+                    <CardContent className="p-7 md:p-8">
+                      <div className="mb-6 flex items-start justify-between gap-4">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100">
+                          <Icon className="h-6 w-6 text-slate-800" />
+                        </div>
+                        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">{project.status}</span>
+                      </div>
+                      <h3 className="text-2xl font-semibold tracking-tight text-slate-950">{project.title}</h3>
+                      <div className="mt-6 space-y-5 text-slate-650">
+                        <div>
+                          <div className="mb-1 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Проблема</div>
+                          <p className="leading-7">{project.problem}</p>
+                        </div>
+                        <div>
+                          <div className="mb-1 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Решение</div>
+                          <p className="leading-7">{project.solution}</p>
+                        </div>
+                        <div>
+                          <div className="mb-1 text-sm font-semibold uppercase tracking-[0.18em] text-slate-400">Эффект</div>
+                          <p className="leading-7">{project.effect}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 py-16 md:px-10 md:py-24">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-2">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={sectionTransition}>
+            <Card className="h-full rounded-[2rem] border-slate-200 bg-white shadow-sm">
+              <CardContent className="p-8 md:p-10">
+                <div className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">Бэкграунд</div>
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight">Почему это не только про IT</h2>
+                <p className="mt-5 leading-8 text-slate-650">
+                  Мой опыт собран из разных контекстов: розница, склад, продажи, IT, логистика, девелопмент, маркетплейсы и собственные продукты. Поэтому я вижу автоматизацию через бизнесовые показатели и операционную реальность, а не только через интерфейс и код.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  {background.map((item) => (
+                    <Pill key={item}>{item}</Pill>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: 0.08 }}>
+            <Card className="h-full rounded-[2rem] border-slate-200 bg-white shadow-sm">
+              <CardContent className="p-8 md:p-10">
+                <div className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">Стек</div>
+                <h2 className="mt-4 text-3xl font-semibold tracking-tight">Инструменты, которыми собираю решения</h2>
+                <p className="mt-5 leading-8 text-slate-650">
+                  Стек для меня — не самоцель. Важнее связка: бизнес-анализ, логика процесса, данные, интеграции, AI и рабочий интерфейс, который можно использовать в реальном процессе.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  {tech.map((item) => (
+                    <Pill key={item}>{item}</Pill>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="px-5 pb-24 pt-16 md:px-10 md:pb-32 md:pt-24">
+        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-white p-8 shadow-sm md:p-12">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={sectionTransition}>
+              <div className="text-sm font-medium uppercase tracking-[0.24em] text-slate-500">Форматы полезности</div>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">Где такой профиль может быть нужен</h2>
+            </motion.div>
+            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-80px" }} variants={fadeUp} transition={{ ...sectionTransition, delay: 0.08 }} className="space-y-5 text-lg leading-8 text-slate-650">
+              <p>
+                Такой профиль полезен в задачах, где бизнесу нужно не просто “нанять разработчика”, а быстро разобраться в процессе, понять, что именно автоматизировать, собрать рабочий прототип и проверить решение на реальности.
+              </p>
+              <p>
+                Это может быть проектное участие, part-time роль, внутренняя роль на стыке продукта и автоматизации, позиция руководителя проектов развития, technical product/project manager или практик, который закрывает малые и средние задачи автоматизации под конкретный бизнес-контекст.
+              </p>
+              <p>
+                Для больших проектов моя роль может быть в том, чтобы проявить бизнес-логику, собрать MVP, описать требования и подготовить понятную основу для полноценной команды разработки.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
