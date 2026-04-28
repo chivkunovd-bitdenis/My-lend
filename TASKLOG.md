@@ -14,7 +14,7 @@ Verified:
 - `npm run lint`
 
 Commit:
-- Pending.
+- `8b5c4e3` (`Make SellerFocus link clickable.`)
 
 ## TASK-3 — 2026-04-28 — Rebuild landing from updated package
 
