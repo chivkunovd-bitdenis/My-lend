@@ -16,7 +16,7 @@ Verified:
 - `npm run preview -- --host 127.0.0.1 --port 4173` served the built app root
 
 Commit:
-- Not created in this chat because there was no explicit commit request.
+- `139ecf4` (`Update portfolio landing.`)
 
 ## TASK-2 — 2026-04-27 — Update landing design (Portfolio page)
 
