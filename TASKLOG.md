@@ -1,5 +1,21 @@
 # TASKLOG
 
+## TASK-4 — 2026-04-28 — Make SellerFocus project link clickable
+
+What changed:
+- Updated the WB seller project solution text to say `Продукт доступен по ссылке:`.
+- Made `sellerfocus.pro` a clickable external link.
+
+What did NOT change:
+- No changes to page layout, dependencies, Vite config, Tailwind config, or deployment settings.
+
+Verified:
+- `npm run build`
+- `npm run lint`
+
+Commit:
+- Pending.
+
 ## TASK-3 — 2026-04-28 — Rebuild landing from updated package
 
 What changed:
