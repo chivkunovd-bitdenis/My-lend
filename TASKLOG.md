@@ -1,5 +1,38 @@
 # TASKLOG
 
+## TASK-3 — 2026-04-28 — Rebuild landing from updated package
+
+What changed:
+- Replaced `src/pages/Portfolio.tsx` with the updated landing from `Portfolio.updated.tsx` / `landing_updated_fixed.zip`.
+- Removed unused helper components from the imported page so ESLint passes without changing rendered content.
+
+What did NOT change:
+- No changes to dependencies, Vite config, Tailwind config, global styles, app entry, or HTML shell.
+- Archive files other than `src/pages/Portfolio.tsx` matched the current project and were not changed.
+
+Verified:
+- `npm run build`
+- `npm run lint`
+- `npm run preview -- --host 127.0.0.1 --port 4173` served the built app root
+
+Commit:
+- Not created in this chat because there was no explicit commit request.
+
+## TASK-2 — 2026-04-27 — Update landing design (Portfolio page)
+
+What changed:
+- Replaced `src/pages/Portfolio.tsx` with the new design from `Portfolio.updated.tsx`.
+
+What did NOT change:
+- No changes to dependencies, Vite config, Tailwind config, or global styles.
+
+Verified:
+- `npm run build`
+- `npm run lint`
+
+Commit:
+- Not created in this chat (ask me to commit if you want it in `main`).
+
 ## TASK-1 — 2026-04-26 — Apply portfolio editorial update
 
 What changed:
